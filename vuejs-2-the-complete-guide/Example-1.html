@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <input type="text" v-on:input="changeTitle"/>
+
+        <h3>
+            Title is: {{title}}
+        </h3>
+
+        <h4>
+            Accessing Properties by Method:{{accessProperties()}}
+        </h4>
+
+        <h4>
+            <!-- Binding href property with Vue instance data property -->
+            <a v-bind:href="link">Google</a>
+        </h4>
+
+
+        <h4 v-once>
+            Title is not udpdated due to v-once binding {{title}}
+            <br />
+            <code>See Code</code>{{updateTitle()}}
+        </h4>
+
+
+        <h3>Listenting to Methods</h3>
+        <h4>Counter {{counter}}</h4>
+        <button @click="incrementCounter">Increment By 2</button>
+        <button @click="decrementCounter">Decrement By 2</button>
+
+
+        
+        <h3>Listenting to Mouse Events</h3>
+        <div @mousemove="updateCoardinates">
+            Mousemove bindings 
+            Coardinates X:{{x}} Y:{{y}}
+            <span @mousemove.stop>Dead Zone using Modifier (Equivalent to event.stopPropogation)</span>
+        </div>
+
+
+        <h3>Listenting to Keyboard Events</h3>
+
+        <h4>Alert on Enter</h4>
+        <input type="text" @keyup.enter="alertMe" />
+
+
+        <h4>Alert on Space</h4>
+        <input type="text" @keyup.space="alertMe" />
+    
+
+        <h4>Store Keystrokes</h4>
+        Ket Pressed is: <b>{{keystrokesValue}}</b>
+        <br/>
+        <input type="text" @keydown="storeKeystrokes" />
+
+    </div>
+
+    <!-- ---------------------------------------- -->
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                title:'Hello World',
+                link: 'http://google.com',
+                counter:0,
+                x:0,
+                y:0,
+                keystrokesValue:''
+            },
+            methods:{
+                changeTitle(e){
+                    this.title = e.target.value
+                },
+                accessProperties(){
+                    return this.title;
+                },
+                updateTitle() {
+                    this.title = 'Update Title';
+                },
+                incrementCounter() {
+                    this.counter+=2;
+                },
+                decrementCounter() {
+                    this.counter-=2;
+                },
+                updateCoardinates(e){
+                 this.x = e.clientX;
+                 this.y = e.clientY;
+                },
+                alertMe(e){
+                  alert(e.target.value);
+                },
+                storeKeystrokes(e){
+                 this.keystrokesValue = e.key;
+                 debugger;
+                 if(e.key == "Enter") {
+                     alert('Enter is Pressed');
+                 }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

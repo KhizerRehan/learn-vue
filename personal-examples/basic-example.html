@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h3>Simple Binding</h3>
+    <div id="app">
+        Counter Value: {{counter}}
+        <button @click="counter+=1">Increment Count +1</button>
+
+        <br />
+        <span v-if="counter>10">Oops!! Counter value cannot be greater than 10!! </span>
+
+
+        <h2>{{product}} are in stock</h2>
+    </div>
+
+
+    <h3>Looping</h3>
+    <div id="looping">
+        <ul>
+            <li v-for="product in products">
+                {{product}}
+            </li>
+        </ul>
+    </div>
+
+
+
+
+    <h3>Todos</h3>
+
+    <div id="todos">
+        <h3>Total No of Toods:{{todos.length}}</h3>
+        <ul>
+            <li v-for="todo in todos">
+                {{todo}}
+            </li>
+        </ul>
+
+        <h3>Total No of Filtered Toods:{{totalFilteredTodos}}</h3>
+        <ul>
+            <li v-for="todo in todos">
+                <span v-if="todo.completed">
+                    {{todo}}
+                </span>
+            </li>
+        </ul>
+    </div>
+
+
+    <!-- ---------------------------------------- -->
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                product: 'Boots',
+                counter: 0
+            }
+        });
+    </script>
+
+
+
+<script>
+    const looping = new Vue({
+        el: '#looping',
+        data: {
+            products: [
+                'Product1',
+                'Product2',
+                'Product3',
+            ]
+        }
+    });
+</script>
+
+
+
+
+<script>
+    const todos = new Vue({
+        el: '#todos',
+        data: {
+            todos: []
+        },
+        computed: {
+            totalFilteredTodos() {
+                return this.todos.filter(todo => todo.completed).length;
+            }
+        },
+        created () {
+            fetch('https://jsonplaceholder.typicode.com/todos')
+            .then(response => response.json())
+            .then(todos =>{
+                this.todos = todos;
+            })
+        }
+    });
+</script>
+
+</body>
+</html>
