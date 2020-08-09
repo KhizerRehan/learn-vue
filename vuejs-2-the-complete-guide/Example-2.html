@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <h3>v-model directive</h3>
+        <input type="text" v-model="fname"/>
+        <input type="text" v-model="lname"/>
+        <b>FullName: {{fname}} {{lname}}</b>
+
+        <br/>
+        Display as Text:
+        <ul>
+            <li>As Text {{link}}</li>
+            <li>
+                As Html
+                <span v-html="link"></span>
+            </li>
+        </ul>
+    </div>
+
+
+    <div id="caching">
+        <button @click="counter++">Increment</button>
+        <button @click="counter--">Decrement</button>
+
+        <h5>I will not console output the computed output</h5>
+        <button @click="secondCounter++">Second Increment</button>
+        <p>Counter: {{counter}} | {{secondCounter}}</p>
+
+        <h5>I will console output everytime</h5>
+        Note: <b>Computed methods can be used as <code>Properties No "()" are required</code</b>
+        <p>Result: {{result() }} | {{ output }}</p>
+
+    
+    </div>
+
+    <!-- ---------------------------------------- -->
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+             fname:'khizer',
+             lname:'rehan',
+             link:"<a href='https://www.google.com'>Visit Google</a>"
+            }
+        });
+    </script>
+
+      
+<script>
+    const caching = new Vue({
+        el:"#caching",
+        data:{
+        counter:0,
+        secondCounter: 0
+        },
+        computed:{
+            output() {
+                console.log('Computed');
+                return this.counter > 5 ? 'Greater than 5': 'Samller than 5'
+            }
+        },
+        watch:{
+         counter (){
+             setTimeout(()=>{
+                console.log('Resetting Counter Value:',this.counter);
+                this.counter = 0;
+             },2000);
+         }
+        },
+        methods: {
+            result(){
+                console.log('Methods');
+                if(this.counter === 10) {
+                 alert('You Hit value of', this.counter);
+                }
+            }
+        }
+
+        // Notes:
+        // Properties in Watcher shold match with property defined in data property
+        
+
+    });
+</script>
+</body>
+</html>
