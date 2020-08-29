@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <h3>v-if && v-else condition</h3>
+        <p v-if="show">You can see me!</p>
+        <p v-else>Now! You can see me!</p>
+        <button type="button" @click="show=!show">Switch</button>
+
+
+        <h3>Show and Hide Template</h3>
+        <template v-if="showTemplate">
+            <h1>Template Heading</h1>
+            <p>Template act as dummy tag and it is not rendered as TAG in DOM.</p>
+            <span>Spanning Multiple Elements</span>
+        </template>
+        <button type="button" @click="showTemplate=!showTemplate">Switch Template</button>
+
+
+        <h3>v-show</h3>
+        <div v-show="!visuallHidden">
+            <p>Using v-show directive i am visually hidden using "display:none" property
+                but exist in DOM if you try to inspect the Element.
+            </p>
+        </div>
+        <button type="button" @click="visuallHidden=!visuallHidden">Switch Show/Hider</button>
+
+
+       
+    </div>
+
+    <!-- ---------------------------------------- -->
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+             show: true,
+             showTemplate: true,
+             visuallHidden: false,
+            }
+        });
+    </script>
+
+
+</body>
+</html>
