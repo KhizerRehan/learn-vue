@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h2>What is your favourite food?</h2>
+        <textarea v-model="food" rows="5"></textarea>
+        <br />
+        <button type="button" v-show="food">Let us know!</button>
+    </div>
+
+    <!-- ---------------------------------------- -->
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    food: ''
+                }
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
