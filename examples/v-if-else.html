@@ -16,6 +16,29 @@
         <button type="button" v-if="food">Let us know!</button>
     </div>
 
+
+    <br />
+    <h1>Example-2</h1>
+
+
+    <div id="app1">
+
+        <h2>Do you like tacos?</h2>
+
+        <input v-model="tacos" type="radio" type="radio" id="yes" value='YES' />
+        <label for="yes">Yes</label>
+
+        <br />
+
+        <input v-model="tacos" type="radio" type="radio" id="no" value='NO' />
+        <label for="no">No</label>
+
+        <br />
+        <p v-if="tacos === 'YES' ">You like Tacos!</p>
+        <p v-else-if="tacos === 'NO' ">You are a Monster!</p>
+
+        <br />
+    </div>
     <!-- ---------------------------------------- -->
 
     <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
@@ -26,6 +49,15 @@
             data() {
                 return {
                     food: ''
+                }
+            }
+        });
+
+        const app1 = new Vue({
+            el: "#app1",
+            data() {
+                return {
+                    tacos: ''
                 }
             }
         });
