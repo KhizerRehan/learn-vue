@@ -18,6 +18,31 @@
         <br />
 
         {{checkedNames}}
+
+        <h1>Example-2</h1>
+
+        <ul>
+            <li v-for="num in 5" :key="num">{{num}}</li>
+        </ul>
+    </div>
+
+    <br /><br />
+
+    <h1>Example-3</h1>
+
+    <div id="app1">
+        <p v-for="(value, key, index) in jokes" :key="value">
+            <b>Key => </b> {{key}}
+            <br />
+
+            <b>Value => </b> {{value}}
+            <br />
+
+            <b>Index => </b> {{index}}
+            <br />
+
+        </p>
+
     </div>
 
     <!-- ---------------------------------------- -->
@@ -57,6 +82,23 @@
                 }
             }
         });
+
+    </script>
+
+    <script>
+        const app1 = new Vue({
+            el: "#app1",
+            data() {
+                return {
+                    jokes: {
+                        question: 'What did one baby prototype say to the other?',
+                        answer: `I'll race you to class!`,
+                        response: 'groan'
+                    }
+                }
+            }
+        });
+
     </script>
 
 
