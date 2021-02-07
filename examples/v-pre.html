@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>What is your favourite tacos?</h1>
+        <p><input v-model="tacos" type="tetx" /></p>
+
+        <p v-pre>This pre directive help to display <b>{{tacos}}</b> curly braces data in mustaches it will not execute
+            the
+            `{{}}` syntax</p>
+
+        <ore>Show Debugging Data {{$data}}</pre>
+    </div>
+
+    <!-- ---------------------------------------- -->
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                tacos: 'This is default input'
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
