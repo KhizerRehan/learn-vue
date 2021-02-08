@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .activeClass {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <form id="test-form" @submit.prevent="submitForm">
+
+            <div>
+                <label for="name">Name:</label>
+                <input name="name" id="name" type="text" v-model="name" required />
+            </div>
+            <br />
+
+            <div>
+                <label for="name">Email:</label>
+                <input name="email" id="name" type="email" v-model="email" required />
+            </div>
+
+            <button :class="[name ? 'activeClass': '']" type="submit">Submit</button>
+        </form>
+
+        <div v-if="serverResponse">
+            <h1>Response from Server:</h1>
+            <pre>
+                {{serverResponse}}
+
+            </pre>
+
+        </div>
+    </div>
+
+
+
+    <!-- ---------------------------------------- -->
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://unpkg.com/browse/axios@0.2.1/dist/axios.js"></script>
+
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                name: '',
+                email: '',
+                serverResponse: ''
+            },
+            methods: {
+                submitForm() {
+                    console.log(this.name);
+                    console.log(this.email);
+
+                    // I didn't have axios therefore added dummy fetch call 
+                    // instead of `post` axios call
+                    fetch('https://jsonplaceholder.typicode.com/users')
+                        .then((data) => data.json())
+                        .then(response => {
+                            var jsonPretty = JSON.stringify(response, null, 4);
+                            this.serverResponse = jsonPretty;
+                        }).catch(error => {
+                            this.serverResponse = 'Error: ' + error.response.status
+                        })
+                }
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
