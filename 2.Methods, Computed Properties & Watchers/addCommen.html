@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <input type="text" v-model="newComment" @keyup.enter="addComment" placeholder="Add a new Comment">
+
+        <h3>Existing Comments:</h3>
+        <ul>
+            <li v-for="(value, key) in comments">
+                {{value}} <span @click="removeComment(value)"><b>x</b></span>
+            </li>
+        </ul>
+    </div>
+
+
+
+    <!-- ---------------------------------------- -->
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                newComment: '',
+                comments: [
+                    'This is comment-1',
+                    'This is comment-2',
+                    'This is comment-3'
+                ]
+            },
+            methods: {
+                addComment() {
+                    this.comments.push(this.newComment);
+                    this.newComment = null;
+                },
+                removeComment(value) {
+                    this.comments = this.comments.filter(comment => comment !== value)
+                }
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
