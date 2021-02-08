@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <div>
+            <input type="number" v-model.number="num1" />
+            <p>+</p>
+            <input type="number" v-model.number="num2" />
+        </div>
+        <span>Result: {{num1+num2}}</span>
+        <br /> <br />
+        <select v-model="name">
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+        </select>
+
+        <p v-if="name">Hey, Selected option is => {{name}}</p>
+
+    </div>
+
+
+
+    <!-- ---------------------------------------- -->
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    num1: 0,
+                    num2: 0,
+                    name: ''
+                }
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
