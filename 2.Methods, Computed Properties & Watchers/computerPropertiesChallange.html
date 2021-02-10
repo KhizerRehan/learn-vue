@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting</title>
+
+
+    <style>
+        .label {
+            background-color: grey;
+            color: white
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <div class="new">
+            <h3>Add a New Post</h3>
+
+            <form @submit.prevent="addNewPost">
+                <label>New Title</label>
+                <input v-model="newTitle" placeholder="New Title..." />
+                <br /><br />
+                <label>New Author</label>
+                <input v-model="newAuthor" placeholder="Author Name..." />
+                <br /><br />
+
+
+                <select v-model="newLabel">
+                    <option disabled>Select Label</option>
+                    <option>Science</option>
+                    <option>Math</option>
+                </select>
+                <button type="submit">Add new Post</button>
+                <br />
+            </form>
+        </div>
+        <br />
+
+        <h3>Filter Posts by label:</h3>
+        <select v-model="selectedLabel">
+            <option disabled>Select Label</option>
+            <option>Science</option>
+            <option>Math</option>
+        </select>
+        <br /><br />
+        <div class="post" v-for="post in filteredByLabel" :key="post.title">
+            <span class="label">{{post.label}}</span>
+            <p>{{post.title}}</p>
+            <small>{{post.author}}</small>
+            <br />
+            <br />
+
+
+        </div>
+
+    </div>
+
+</body>
+
+
+
+<!-- ---------------------------------------- -->
+
+<script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            newLabel: '',
+            selectedLabel: '',
+            newAuthor: '',
+            newTitle: '',
+            posts: [
+                {
+                    author: '@vFitzgerald',
+                    title: 'Quod Ducimus Omnis',
+                    label: 'science'
+                },
+                {
+                    author: '@mPalmer',
+                    title: 'Vero Eius Laboriosam Ex Repudiandae',
+                    label: 'math'
+                },
+                {
+                    author: '@cCollier',
+                    title: 'Dolor Nihil Delectus',
+                    label: 'science'
+                }
+            ]
+
+        },
+        methods: {
+            addNewPost(e) {
+                let newAddedPost = {
+                    author: this.newAuthor,
+                    title: this.newTitle,
+                    label: this.newLabel.toLowerCase()
+                }
+                this.posts.push(newAddedPost);
+                this.newAuthor = '';
+                this.newLabel = ''
+                this.newTitle = '';
+            }
+        },
+        computed: {
+            filteredByLabel() {
+                console.log('filteredByLabel');
+                const updatedPosts = this.posts.filter(post => {
+                    return post.label === this.selectedLabel.toLowerCase()
+                });
+
+                debugger;
+                return updatedPosts;
+            }
+        }
+    });
+</script>
+
+
+</body>
+
+</html>
