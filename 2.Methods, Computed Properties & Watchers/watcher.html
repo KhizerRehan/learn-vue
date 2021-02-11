@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting</title>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <h2>Current Counter {{counter}}</h2>
+        <button type="button" @click="incrementCount">Increment Counter By 5</button>
+    </div>
+
+    <!-- ---------------------------------------- -->
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                counter: 0
+            },
+            methods: {
+                incrementCount() {
+                    this.counter += 5;
+                }
+            },
+            watch: {
+                counter(newValue, oldValue) {
+                    console.log('newValue', newValue, 'oldValue', oldValue);
+                    console.log('Log me whenever the counter value changes');
+                }
+            }
+
+
+        });
+    </script>
+
+
+</body>
+
+</html>
