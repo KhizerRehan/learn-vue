@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting</title>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- https://codepen.io/sdras/pen/dRqZOy -->
+
+        <div>
+            <button @click="getTaco">
+                Order a Taco
+            </button>
+            <h2>{{orderStatus}}</h2>
+        </div>
+    </div>
+
+
+    <!-- Do this example too: -->
+    <!-- https://codepen.io/sdras/pen/dRqZOy -->
+
+
+    <!-- ---------------------------------------- -->
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                orderStatus: 'Where is my taco?'
+            },
+            methods: {
+                getTaco() {
+                    this.orderStatus = 'Here it is!!'
+                }
+            },
+            watch: {
+                orderStatus(newValue, oldValue) {
+                    console.log('newValue =>', newValue, 'oldValue =>', oldValue);
+
+                    if (newValue !== oldValue) {
+                        setTimeout(() => {
+                            this.orderStatus = null
+                        }, 3000)
+                    }
+                }
+            }
+
+
+        });
+    </script>
+
+
+</body>
+
+</html>
