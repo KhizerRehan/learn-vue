@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>Testing Component:</h1>
+        Name => {{name}}
+        <input v-model="name" type="text" />
+
+
+        <h4>Watcher =>{{name}}</h4>
+
+        <h3>Child Component:</h3>
+
+        <h5>Dynamic Binding of variable from parent to child</h5>
+        <app-hello :name=name></app-hello>
+        <h5>Static Binding of variable from parent to child</h5>
+        <app-hello name="Static Text"></app-hello>
+
+    </div>
+
+    <!-- ---------------------------------------- -->
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+
+    <script>
+        Vue.component('app-hello', {
+            props: {
+                name: String,
+                required: true,
+                defaults: 'Default Name is Khizer'
+            },
+            template: `
+             <h2>Hello, My Name is {{name}}</h2>             
+            `
+        });
+
+        const app = new Vue({
+            el: "#app",
+            data: {
+                name: 'Default Name '
+            },
+            watch: {
+                // There is no need here! added just for testing watcher
+                name(newValue, oldValue) {
+                    console.log('NewName =>', newValue, 'Old Name =>', oldValue);
+                }
+            }
+        });
+
+    </script>
+
+
+</body>
+
+</html>
