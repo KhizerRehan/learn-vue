@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>This is parent Component</h1>
+
+        <span>Taco Value: <b>{{taco}}</b> </span>
+        <order-button @gettaco="updateTaco"></order-button>
+    </div>
+
+    <!-- ---------------------------------------- -->
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+
+
+    <script type="text/x-template" id="order-taco">
+     <div>
+         <h4>This is Order Button Component</h4>
+         <button type="button" @click="$emit('gettaco')">Emit Data to Parent</button>
+     </div>
+
+    </script>
+
+    <!-- ------------------- -->
+
+
+    <script>
+
+
+        Vue.component('order-button', {
+            template: "#order-taco"
+        });
+
+        const app = new Vue({
+            el: "#app",
+            data: {
+                taco: 'Default Taco'
+            },
+            methods: {
+                updateTaco() {
+                    debugger;
+                    this.taco = 'Taco Updated by Child';
+                }
+            }
+        });
+    </script>
+
+
+
+</body>
+
+</html>
