@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .flex {
+            display: flex;
+        }
+
+        .mlr-20 {
+            margin: 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>Render Child Components:</h1>
+        <p><small>Note:</small> Each component has it's own isolated scope:</p>
+        <br />
+
+
+        <div v-if="isEmitted">
+            Hey! My Name is <b>{{emittedData.name}}</b> and my Counter value is {{emittedData.counter}}!!
+        </div>
+
+
+        <div class="flex">
+            <app-shirt v-for="unit in manifest" :key="unit.item" :unit="unit" class="mlr-20"
+                @backpack="displayEmittedValue"></app-shirt>
+        </div>
+    </div>
+
+    <!-- ---------------------------------------- -->
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+
+    <!-- This is the Individual Shirt -->
+    <script type="text/x-template" id="comment-template">
+     <div>
+      <p>Name:{{unit.item}}</p>
+      <img :src="unit.url" :alt="unit.item">
+      
+        <div class="flex">
+            <button type="button" @click="incrementCount">Increment+1</button>
+            <span>Quantity: {{counter}}</span>
+            <button type="button" @click="decrementCount">Decrement-1</button>
+        </div>
+
+        <button type="button" @click=emitValue(unit)>Emit Data</button>
+     </div>
+    </script>
+
+
+    <script>
+        Vue.component('app-shirt', {
+            template: '#comment-template',
+            props: ['unit'],
+            data() {
+                return {
+                    counter: 0
+                }
+            },
+            methods: {
+                incrementCount() {
+                    this.counter++;
+                },
+                decrementCount() {
+                    this.counter--;
+                },
+                emitValue({ item }) {
+                    debugger;
+                    this.$emit('backpack', {
+                        name: item,
+                        counter: this.counter
+                    })
+                }
+            }
+        });
+
+
+        const app = new Vue({
+            el: "#app",
+            data: {
+                manifest: [
+                    {
+                        item: "backpack",
+                        url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/backpack.jpg"
+                    },
+                    {
+                        item: "tshirt",
+                        url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/tshirt.jpg"
+                    },
+                    {
+                        item: "sweatshirt",
+                        url: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/sweatshirt.jpg"
+                    },
+                ],
+                isEmitted: false,
+                emittedData: {}
+            },
+            methods: {
+                displayEmittedValue(obj) {
+                    debugger;
+                    if (obj && Object.keys(obj).length > 0) {
+                        this.isEmitted = true;
+                        const { name, counter } = obj;
+                        this.emittedData = {
+                            name,
+                            counter
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+
+
+</body>
+
+</html>
