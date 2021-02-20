@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #main {
+            background-color: #e1dddd;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <slots-testing>
+            <template v-slot:header>
+                <h1>I am Header</h1>
+                <nav>
+                    <ul>
+                        <li>nav-item-1</li>
+                        <li>nav-item-2</li>
+                        <li>nav-item-3</li>
+                    </ul>
+                </nav>
+            </template>
+
+            <template v-slot:default>
+                <div id="main">
+                    <h3>Body Here!!</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, alias? Pariatur dolores
+                        accusantium fugit necessitatibus voluptates sed, odit quo aut. Quaerat repudiandae saepe fugit
+                        placeat beatae iure asperiores dolor dolorem.
+                    </p>
+                </div>
+            </template>
+
+            <template v-slot:footer>
+                <h1>I am Footer</h1>
+
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto possimus, libero voluptas quos rem
+                doloremque tempora quis in hic perspiciatis praesentium, neque ducimus voluptatum illo dolores assumenda
+                non minima explicabo!
+            </template>
+
+
+        </slots-testing>
+    </div>
+
+    <!-- ---------------------------------------- -->
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+
+    <script type="text/x-template" id="child">
+        <div> 
+          <header>
+            <slot name="header"></slot>
+          </header>
+          <main>
+            <slot></slot>
+          </main>
+          <footer>
+            <slot name="footer"></slot>
+          </footer>
+        </div>
+      </script>
+
+
+
+    <script>
+        Vue.component('slots-testing', {
+            template: "#child"
+        });
+    </script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
